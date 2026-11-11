@@ -90,19 +90,23 @@ export function createWalletClient(readSetting: (name: string) => string | undef
 
   async function upsert(card: Card, accessToken: string, update: boolean) {
     const body = pass(card);
-    const send = (method: string, path: string) => fetch(api + path, {
-      method, body: JSON.stringify(body),
+    const send = (method: string, path: string, payload: object) => fetch(api + path, {
+      method, body: JSON.stringify(payload),
       headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
       signal: AbortSignal.timeout(10000),
     });
     const path = `/loyaltyObject/${body.id}`;
-    const insert = await send('POST', '/loyaltyObject');
-    if (insert.ok || (insert.status === 409 && !update)) return;
-    if (insert.status === 409) {
-      const patch = await send('PATCH', path);
+    if (update) {
+      const { classId: _classId, ...fields } = body;
+      const patch = await send('PATCH', path, fields);
       if (patch.ok) return;
-      throw new Error(`Google Wallet no actualizó la tarjeta (${patch.status}).`);
+      if (patch.status !== 404) {
+        throw new Error(`Google Wallet no actualizó la tarjeta (${patch.status}).`);
+      }
+      await ensureClass(accessToken);
     }
+    const insert = await send('POST', '/loyaltyObject', body);
+    if (insert.ok || (insert.status === 409 && !update)) return;
     throw new Error(`Google Wallet no creó la tarjeta (${insert.status}).`);
   }
 
