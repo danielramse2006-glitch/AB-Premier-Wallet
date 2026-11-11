@@ -4,3 +4,16 @@ body.socios{background:#0a2318;color:#fff6df}body.socios .hero p{color:#d7e5da}b
 .prize-picture{width:min(310px,58vw);height:min(470px,58vh);background:#fff7e8;border-radius:18px}.prize-picture img{object-fit:contain}
 #registerStep .kiosk-panel-title{margin-top:6px}#registerStep .kiosk-panel-subtitle{margin-bottom:18px}.kiosk-register-form{max-width:560px;margin:0 auto}.kiosk-register-form label{text-align:left;text-transform:uppercase;letter-spacing:.08em;font-size:12px}.kiosk-register-form input{height:54px;border-radius:13px}.kiosk-register-form .kiosk-register{min-height:66px;font-size:clamp(22px,1.8vw,32px)}.camera-actions button{min-height:54px;font-size:18px;text-transform:uppercase}.kiosk-camera{box-shadow:0 12px 34px #0008}
 .kiosk-topbar{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;margin-bottom:10px}.kiosk-topbar .kiosk-clock{margin:0;text-align:left}.kiosk-signout{border:1px solid #d7ae56;border-radius:999px;background:#061d15;color:#f5d57c;font-weight:800;padding:8px 13px;cursor:pointer}
+
+.wallet-enrollment-qr {
+  margin: 1rem auto;
+  text-align: center;
+  color: #fff6df;
+}
+.wallet-enrollment-qr svg {
+  display: block;
+  width: min(240px, 100%);
+  height: auto;
+  margin: 0 auto .5rem;
+  background: #fff;
+}

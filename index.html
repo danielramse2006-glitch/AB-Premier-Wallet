@@ -33,8 +33,13 @@
 
       <div id="visitStep">
       <div id="nipStep">
-        <p class="kiosk-panel-title">Ingresa tu NIP</p>
-        <p class="kiosk-panel-subtitle">Para registrar tu visita</p>
+        <p class="kiosk-panel-title">Identifica al socio</p>
+        <button class="kiosk-register" type="button" id="scanWallet">Escanear tarjeta Wallet</button>
+        <div id="scanner" class="hidden">
+          <div class="kiosk-camera"><video id="walletVideo" autoplay muted playsinline></video></div>
+          <button class="kiosk-back" type="button" id="stopWallet">Cerrar cámara</button>
+        </div>
+        <p class="kiosk-panel-subtitle">También puedes ingresar el NIP</p>
         <form id="lookupForm" class="kiosk-form">
           <input id="code" maxlength="4" pattern="[0-9]{4}" inputmode="numeric" autocomplete="off" aria-label="NIP de 4 digitos" required>
           <div class="pin-dots" aria-hidden="true">
@@ -58,7 +63,7 @@
       </div>
 
       <div id="clientArea" class="hidden">
-        <div id="clientCard"></div>
+        <div id="clientCard"></div><div id="clientWallet"></div>
         <div class="kiosk-selects">
           <div>
             <label>Barbero</label>
@@ -70,16 +75,13 @@
           </div>
         </div>
         <button class="kiosk-register" id="registerVisitButton" onclick="registerVisit()">Registrar visita</button>
-        <button class="kiosk-back" onclick="resetKiosk()">Cambiar NIP</button>
+        <button class="kiosk-back" onclick="resetKiosk()">Cambiar socio</button>
       </div>
       </div>
 
       <div id="registerStep" class="hidden">
         <p class="kiosk-panel-title">Registrar socio</p>
         <p class="kiosk-panel-subtitle">Alta Familia AB</p>
-        <div class="kiosk-camera"><video id="video" autoplay playsinline></video></div>
-        <p class="camera-actions"><button type="button" onclick="startCamera()">Encender camara</button><button type="button" onclick="capture()">Tomar foto</button></p>
-        <canvas id="canvas" hidden></canvas>
         <form id="registerForm" class="kiosk-register-form">
           <label>Nombre completo</label>
           <input id="fullName" required>
@@ -89,7 +91,7 @@
           <input id="phone">
           <button class="kiosk-register" type="submit">Crear socio</button>
         </form>
-        <div id="registerMessage" class="kiosk-message" role="status"></div>
+        <div id="registerMessage" class="kiosk-message" role="status"></div><div id="newWallet"></div>
       </div>
     </section>
 

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarjeta Familia AB</title>
+<style>
+:root { color-scheme: dark; font-family: Georgia, serif; color: #fff6df; background: #080f0c; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 1.5rem; background: radial-gradient(ellipse at 50% 18%, #1a3527, #080f0c 65%); }
+main { width: min(100%, 400px); }
+h1 { font-size: 1.05rem; font-family: system-ui, sans-serif; font-weight: 500; margin: 0 0 .85rem; color: #e7d7b3; }
+.card { padding: 1.45rem; background: linear-gradient(148deg,#163628,#0a2318 55%); border: 1px solid #a1844b; border-radius: 1.4rem; box-shadow: 0 1.5rem 4rem #0007; }
+header { display: flex; align-items: center; gap: 1rem; padding-bottom: 1.3rem; border-bottom: 1px solid #a1844b70; }
+header img { width: 54px; height: 54px; object-fit: contain; }
+h2 { margin: .15rem 0 0; font-size: 1.9rem; font-weight: 400; }
+.brand, dt, .qr-caption, footer { font: .8rem system-ui,sans-serif; color: #e3ca92; }
+.brand { text-transform: uppercase; letter-spacing: .14em; }
+dl { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
+dd { margin: .25rem 0 0; font-size: 1.05rem; }
+.qr { display: block; width: 132px; height: 132px; margin: 1rem auto .5rem; padding: 9px; background: #fff; border-radius: .6rem; }
+.qr-caption, footer { text-align: center; }
+footer { margin-top: 1rem; color: #dbcba8; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Vista previa de la tarjeta</h1>
+  <article class="card">
+    <header>
+      <img src="assets/logo-ab-premiere.png" alt="">
+      <div><div class="brand">AB Premier</div><h2>Familia AB</h2></div>
+    </header>
+    <dl>
+      <div><dt>Socio</dt><dd>Alex García</dd></div>
+      <div><dt>Membresía</dt><dd>Membership</dd></div>
+      <div><dt>Cortes acumulados</dt><dd>9</dd></div>
+      <div><dt>Próximo beneficio</dt><dd>Corte gratis · 9/10</dd></div>
+    </dl>
+    <img class="qr" id="previewQr" alt="QR de muestra">
+    <p class="qr-caption">Escanea en la barbería</p>
+  </article>
+  <footer>Diseño de referencia. Google Wallet ajusta la distribución en el celular.</footer>
+</main>
+<script type="module">
+  import { BrowserQRCodeSvgWriter } from '@zxing/browser';
+  const writer = new BrowserQRCodeSvgWriter();
+  const qr = writer.write('AB Premier — vista previa', 114, 114);
+  const target = document.querySelector('#previewQr');
+  target.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(qr));
+</script>
+</body>
+</html>

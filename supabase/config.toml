@@ -1,0 +1,4 @@
+project_id = "ab-premier-wallet"
+
+[functions.wallet]
+verify_jwt = false

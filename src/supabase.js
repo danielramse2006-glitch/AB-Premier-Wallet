@@ -32,13 +32,6 @@ export function dashboard(data){
  const lists={new:clients.filter(c=>localDay(c.created_at).startsWith(month)),absent:clients.filter(c=>c.days_absent>=30),monthly:clients.filter(c=>c.month_visits>=1),frequent:clients.filter(c=>c.month_visits>=2&&c.month_visits<=3),upcoming:clients.filter(c=>nextReward(c.visits)?.[0]===c.visits+1),birthdays:clients.filter(c=>c.birth_date?.slice(5,7)===month.slice(5)),today:clients.filter(c=>localDay(c.last_visit)===today)};
  return {clients,lists,daily,weekday_percentages:weekday.map(n=>total?Math.round(n*1000/total)/10:0),metrics:{active:clients.filter(c=>c.active).length,today:daily[today]||0,month_visits:monthVisits,...Object.fromEntries(Object.entries(lists).filter(([k])=>k!=='today').map(([k,v])=>[k,v.length]))}};
 }
-async function uploadPhoto(id,photo){
- const blob=await(await fetch(photo)).blob();
- if(!['image/jpeg','image/png'].includes(blob.type)||blob.size>4194304)throw Error('La foto debe ser JPG o PNG y pesar menos de 4 MB.');
- const path=`${id}/${crypto.randomUUID()}.${blob.type==='image/png'?'png':'jpg'}`;
- const {error}=await sb.storage.from('client-photos').upload(path,blob,{contentType:blob.type});
- if(error)throw Error(explain(error));await rpc('set_photo',{id,path});
-}
 export async function api(action,data=null,query=''){
  const p={...Object.fromEntries(new URLSearchParams(query.replace(/^&/,''))),...data};
  if(action==='admin_login'){
