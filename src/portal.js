@@ -127,6 +127,7 @@ function stopScan() {
 async function startScan() {
   if (busy || !$('scanner').classList.contains('hidden')) return;
   const run = ++scanRun;
+  msg('lookupMessage', '');
   $('scanner').classList.remove('hidden');
   try {
     const { BrowserQRCodeReader } = await import('@zxing/browser');

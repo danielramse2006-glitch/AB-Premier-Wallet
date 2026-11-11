@@ -36,7 +36,11 @@
         <p class="kiosk-panel-title">Identifica al socio</p>
         <button class="kiosk-register" type="button" id="scanWallet">Escanear tarjeta Wallet</button>
         <div id="scanner" class="hidden">
-          <div class="kiosk-camera"><video id="walletVideo" autoplay muted playsinline></video></div>
+          <div class="wallet-scanner-camera">
+            <video id="walletVideo" autoplay muted playsinline></video>
+            <div class="wallet-scanner-guide" aria-hidden="true"></div>
+          </div>
+          <p class="wallet-scanner-hint">Centra el QR dentro del marco</p>
           <button class="kiosk-back" type="button" id="stopWallet">Cerrar cámara</button>
         </div>
         <p class="kiosk-panel-subtitle">También puedes ingresar el NIP</p>

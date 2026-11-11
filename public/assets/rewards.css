@@ -17,3 +17,50 @@ body.socios{background:#0a2318;color:#fff6df}body.socios .hero p{color:#d7e5da}b
   margin: 0 auto .5rem;
   background: #fff;
 }
+
+.wallet-scanner-camera {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 300px);
+  aspect-ratio: 1;
+  margin: 1rem auto 0;
+  overflow: hidden;
+  border: 1px solid #d7ae56;
+  border-radius: 1rem;
+  background: #030806;
+}
+.wallet-scanner-camera video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wallet-scanner-guide {
+  position: absolute;
+  inset: 15%;
+  border: 2px solid #f2cd79;
+  border-radius: .5rem;
+  overflow: hidden;
+  box-shadow: 0 0 0 100vmax #03080655;
+  pointer-events: none;
+}
+.wallet-scanner-guide::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: #fce3a4;
+  box-shadow: 0 0 12px #f2cd79;
+  animation: wallet-scan 2.4s ease-in-out infinite alternate;
+}
+@keyframes wallet-scan {
+  from { top: 5%; }
+  to { top: 95%; }
+}
+.wallet-scanner-hint {
+  margin: .55rem 0 .8rem;
+  color: #fff6df;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wallet-scanner-guide::after { display: none; }
+}
